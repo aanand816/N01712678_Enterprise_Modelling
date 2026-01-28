@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface GuestService {
     List<Guest> getAllGuests();
-    Guest getGuestById(Integer id);
+    Guest getGuestById(Long id);
     Guest addGuest(Guest guest);
-    Guest updateGuest(Integer id, Guest guest);
-    void deleteGuest(Integer id);
+    Guest updateGuest(Long id, Guest guest);
+    void deleteGuest(Long id);
 }

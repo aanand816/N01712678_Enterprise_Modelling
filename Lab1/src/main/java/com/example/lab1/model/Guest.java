@@ -1,7 +1,17 @@
 package com.example.lab1.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Guest {
-    private Integer guestId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String guestName;
     private String contact;
     private String email;
@@ -10,20 +20,19 @@ public class Guest {
     public Guest() {
     }
 
-    public Guest(Integer guestId, String guestName, String contact, String email, String address) {
-        this.guestId = guestId;
+    public Guest(String guestName, String contact, String email, String address) {
         this.guestName = guestName;
         this.contact = contact;
         this.email = email;
         this.address = address;
     }
 
-    public Integer getGuestId() {
-        return guestId;
+    public Long getId() {
+        return id;
     }
 
-    public void setGuestId(Integer guestId) {
-        this.guestId = guestId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getGuestName() {

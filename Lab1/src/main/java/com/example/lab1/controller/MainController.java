@@ -24,7 +24,7 @@ public class MainController {
     @Autowired
     private BookingService bookingService;
 
-    // ---------- Room endpoints ----------
+    // ---------- Room ----------
 
     @GetMapping("/rooms")
     public List<Room> getAllRooms() {
@@ -32,7 +32,7 @@ public class MainController {
     }
 
     @GetMapping("/rooms/{id}")
-    public Room getRoomById(@PathVariable Integer id) {
+    public Room getRoomById(@PathVariable Long id) {
         return roomService.getRoomById(id);
     }
 
@@ -42,16 +42,16 @@ public class MainController {
     }
 
     @PutMapping("/rooms/{id}")
-    public Room updateRoom(@PathVariable Integer id, @RequestBody Room room) {
+    public Room updateRoom(@PathVariable Long id, @RequestBody Room room) {
         return roomService.updateRoom(id, room);
     }
 
     @DeleteMapping("/rooms/{id}")
-    public void deleteRoom(@PathVariable Integer id) {
+    public void deleteRoom(@PathVariable Long id) {
         roomService.deleteRoom(id);
     }
 
-    // ---------- Guest endpoints ----------
+    // ---------- Guest ----------
 
     @GetMapping("/guests")
     public List<Guest> getAllGuests() {
@@ -59,7 +59,7 @@ public class MainController {
     }
 
     @GetMapping("/guests/{id}")
-    public Guest getGuestById(@PathVariable Integer id) {
+    public Guest getGuestById(@PathVariable Long id) {
         return guestService.getGuestById(id);
     }
 
@@ -69,16 +69,16 @@ public class MainController {
     }
 
     @PutMapping("/guests/{id}")
-    public Guest updateGuest(@PathVariable Integer id, @RequestBody Guest guest) {
+    public Guest updateGuest(@PathVariable Long id, @RequestBody Guest guest) {
         return guestService.updateGuest(id, guest);
     }
 
     @DeleteMapping("/guests/{id}")
-    public void deleteGuest(@PathVariable Integer id) {
+    public void deleteGuest(@PathVariable Long id) {
         guestService.deleteGuest(id);
     }
 
-    // ---------- Booking endpoints ----------
+    // ---------- Booking ----------
 
     @GetMapping("/bookings")
     public List<Booking> getAllBookings() {
@@ -86,7 +86,7 @@ public class MainController {
     }
 
     @GetMapping("/bookings/{id}")
-    public Booking getBookingById(@PathVariable Integer id) {
+    public Booking getBookingById(@PathVariable Long id) {
         return bookingService.getBookingById(id);
     }
 
@@ -96,18 +96,19 @@ public class MainController {
     }
 
     @PutMapping("/bookings/{id}")
-    public Booking updateBooking(@PathVariable Integer id, @RequestBody Booking booking) {
+    public Booking updateBooking(@PathVariable Long id, @RequestBody Booking booking) {
         return bookingService.updateBooking(id, booking);
     }
 
     @DeleteMapping("/bookings/{id}")
-    public void deleteBooking(@PathVariable Integer id) {
+    public void deleteBooking(@PathVariable Long id) {
         bookingService.deleteBooking(id);
     }
 
-    // Extra: all bookings for a guest
+    // All bookings for a guest
+
     @GetMapping("/guests/{guestId}/bookings")
-    public List<Booking> getBookingsForGuest(@PathVariable Integer guestId) {
+    public List<Booking> getBookingsForGuest(@PathVariable Long guestId) {
         return bookingService.getBookingsByGuestId(guestId);
     }
 }

@@ -5,11 +5,9 @@ import java.util.List;
 
 public interface BookingService {
     List<Booking> getAllBookings();
-    Booking getBookingById(Integer id);
+    Booking getBookingById(Long id);
     Booking addBooking(Booking booking);
-    Booking updateBooking(Integer id, Booking booking);
-    void deleteBooking(Integer id);
-
-    // extra: all bookings for a given guest
-    List<Booking> getBookingsByGuestId(Integer guestId);
+    Booking updateBooking(Long id, Booking booking);
+    void deleteBooking(Long id);
+    List<Booking> getBookingsByGuestId(Long guestId);
 }

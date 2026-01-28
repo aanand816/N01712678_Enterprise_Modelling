@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface RoomService {
     List<Room> getAllRooms();
-    Room getRoomById(Integer id);
+    Room getRoomById(Long id);
     Room addRoom(Room room);
-    Room updateRoom(Integer id, Room room);
-    void deleteRoom(Integer id);
+    Room updateRoom(Long id, Room room);
+    void deleteRoom(Long id);
 }

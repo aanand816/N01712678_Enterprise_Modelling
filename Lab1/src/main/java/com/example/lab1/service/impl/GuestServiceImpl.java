@@ -1,46 +1,45 @@
 package com.example.lab1.service.impl;
 
 import com.example.lab1.model.Guest;
+import com.example.lab1.repository.GuestRepository;
 import com.example.lab1.service.GuestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class GuestServiceImpl implements GuestService {
 
-    private final Map<Integer, Guest> guests = new HashMap<>();
-    private Integer nextId = 1;
+    @Autowired
+    private GuestRepository guestRepository;
 
     @Override
     public List<Guest> getAllGuests() {
-        return new ArrayList<>(guests.values());
+        return guestRepository.findAll();
     }
 
     @Override
-    public Guest getGuestById(Integer id) {
-        return guests.get(id);
+    public Guest getGuestById(Long id) {
+        return guestRepository.findById(id).orElse(null);
     }
 
     @Override
     public Guest addGuest(Guest guest) {
-        guest.setGuestId(nextId++);
-        guests.put(guest.getGuestId(), guest);
-        return guest;
+        return guestRepository.save(guest);
     }
 
     @Override
-    public Guest updateGuest(Integer id, Guest guest) {
-        if (!guests.containsKey(id)) {
+    public Guest updateGuest(Long id, Guest guest) {
+        if (!guestRepository.existsById(id)) {
             return null;
         }
-        guest.setGuestId(id);
-        guests.put(id, guest);
-        return guest;
+        guest.setId(id);
+        return guestRepository.save(guest);
     }
 
     @Override
-    public void deleteGuest(Integer id) {
-        guests.remove(id);
+    public void deleteGuest(Long id) {
+        guestRepository.deleteById(id);
     }
 }

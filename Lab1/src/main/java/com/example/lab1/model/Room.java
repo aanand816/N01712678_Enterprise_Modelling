@@ -1,7 +1,17 @@
 package com.example.lab1.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Room {
-    private Integer roomId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Float roomSize;
     private Integer noOfBeds;
     private String condition;
@@ -10,20 +20,19 @@ public class Room {
     public Room() {
     }
 
-    public Room(Integer roomId, Float roomSize, Integer noOfBeds, String condition, Integer rent) {
-        this.roomId = roomId;
+    public Room(Float roomSize, Integer noOfBeds, String condition, Integer rent) {
         this.roomSize = roomSize;
         this.noOfBeds = noOfBeds;
         this.condition = condition;
         this.rent = rent;
     }
 
-    public Integer getRoomId() {
-        return roomId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Float getRoomSize() {

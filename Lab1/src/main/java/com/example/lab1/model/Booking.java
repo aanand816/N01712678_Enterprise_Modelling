@@ -1,9 +1,19 @@
 package com.example.lab1.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Booking {
-    private Integer bookingId;
-    private Integer guestId;
-    private Integer roomId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long guestId;
+    private Long roomId;
     private String startDate;
     private String endDate;
     private Integer billId;
@@ -11,9 +21,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Integer bookingId, Integer guestId, Integer roomId,
-                   String startDate, String endDate, Integer billId) {
-        this.bookingId = bookingId;
+    public Booking(Long guestId, Long roomId, String startDate, String endDate, Integer billId) {
         this.guestId = guestId;
         this.roomId = roomId;
         this.startDate = startDate;
@@ -21,27 +29,27 @@ public class Booking {
         this.billId = billId;
     }
 
-    public Integer getBookingId() {
-        return bookingId;
+    public Long getId() {
+        return id;
     }
 
-    public void setBookingId(Integer bookingId) {
-        this.bookingId = bookingId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Integer getGuestId() {
+    public Long getGuestId() {
         return guestId;
     }
 
-    public void setGuestId(Integer guestId) {
+    public void setGuestId(Long guestId) {
         this.guestId = guestId;
     }
 
-    public Integer getRoomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId) {
+    public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 

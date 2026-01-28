@@ -1,57 +1,50 @@
 package com.example.lab1.service.impl;
 
 import com.example.lab1.model.Booking;
+import com.example.lab1.repository.BookingRepository;
 import com.example.lab1.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    private final Map<Integer, Booking> bookings = new HashMap<>();
-    private Integer nextId = 1;
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @Override
     public List<Booking> getAllBookings() {
-        return new ArrayList<>(bookings.values());
+        return bookingRepository.findAll();
     }
 
     @Override
-    public Booking getBookingById(Integer id) {
-        return bookings.get(id);
+    public Booking getBookingById(Long id) {
+        return bookingRepository.findById(id).orElse(null);
     }
 
     @Override
     public Booking addBooking(Booking booking) {
-        booking.setBookingId(nextId++);
-        bookings.put(booking.getBookingId(), booking);
-        return booking;
+        return bookingRepository.save(booking);
     }
 
     @Override
-    public Booking updateBooking(Integer id, Booking booking) {
-        if (!bookings.containsKey(id)) {
+    public Booking updateBooking(Long id, Booking booking) {
+        if (!bookingRepository.existsById(id)) {
             return null;
         }
-        booking.setBookingId(id);
-        bookings.put(id, booking);
-        return booking;
+        booking.setId(id);
+        return bookingRepository.save(booking);
     }
 
     @Override
-    public void deleteBooking(Integer id) {
-        bookings.remove(id);
+    public void deleteBooking(Long id) {
+        bookingRepository.deleteById(id);
     }
 
     @Override
-    public List<Booking> getBookingsByGuestId(Integer guestId) {
-        List<Booking> result = new ArrayList<>();
-        for (Booking booking : bookings.values()) {
-            if (booking.getGuestId() != null && booking.getGuestId().equals(guestId)) {
-                result.add(booking);
-            }
-        }
-        return result;
+    public List<Booking> getBookingsByGuestId(Long guestId) {
+        return bookingRepository.findByGuestId(guestId);
     }
 }
